@@ -261,7 +261,7 @@ export const traceTypes = (_) => [
   {
     value: 'splom',
     label: _('Scatterplot Matrix'),
-    category: chartCategory(_).HIDDEN,
+    category: chartCategory(_).SPECIALIZED,
   },
   {
     value: 'scattercarpet',

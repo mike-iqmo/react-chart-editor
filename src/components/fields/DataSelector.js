@@ -33,6 +33,11 @@ export class UnconnectedDataSelector extends Component {
       ? this.context.srcConverters.toSrc(this.srcProperty, props.container?.type)
       : this.srcProperty;
 
+    if (props.attr === 'dimensions.values' && props.container.type === 'splom' && Array.isArray(props.container.dimensions)){
+      this.fullValue = props.container.dimensions.map(dim=>dim.valuessrc)
+    }
+
+
     this.is2D = false;
     if (props.container) {
       this.is2D =
@@ -50,6 +55,7 @@ export class UnconnectedDataSelector extends Component {
             'contour',
             'contourgl',
           ].includes(props.container.type)) ||
+          props.attr === 'dimensions.values' && props.container.type === 'splom' ||
         (props.attr === 'z' &&
           [
             'contour',
@@ -94,6 +100,15 @@ export class UnconnectedDataSelector extends Component {
     update[this.srcAttr] = maybeAdjustSrc(adjustedValue, this.srcAttr, this.props.container.type, {
       fromSrc: this.context.srcConverters ? this.context.srcConverters.fromSrc : null,
     });
+
+    if (this.props.attr === 'dimensions.values' && this.props.container.type === 'splom') {
+      update.dimensions = update['dimensions.values'].map((values,idx)=>({
+        values,
+        label: update['dimensions.valuessrc'][idx],
+        valuessrc:update['dimensions.valuessrc'][idx]
+      }))
+    }
+
 
     if (this.props.container.type) {
       // this means we're at the top level of the trace

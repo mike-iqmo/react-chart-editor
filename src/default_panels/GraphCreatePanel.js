@@ -73,6 +73,8 @@ const GraphCreatePanel = (props, {localize: _, setPanel}) => (
       }}
       attr="z"
     />
+
+
     <DropdownCustom
       label={_('GeoJSON Location Field')}
       attr="featureidkey"
@@ -86,6 +88,10 @@ const GraphCreatePanel = (props, {localize: _, setPanel}) => (
     />
     <Numeric label={_('Radius')} attr="radius" min={0} max={50} showSlider />
     <DataSelector label={_('Measure')} attr="measure" />
+
+    <PlotlySection name={_('Dimensions')}>
+      <DataSelector label={_('Values')} attr="dimensions.values" />
+    </PlotlySection>
 
     <PlotlySection name={_('Nodes')}>
       <DataSelector label={_('Labels')} attr="node.label" />
