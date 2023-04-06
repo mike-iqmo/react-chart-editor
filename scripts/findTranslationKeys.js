@@ -8,7 +8,7 @@ const path = require('path');
 // so you can call:
 //   findTranslationKeys <srcPath> <outputPath>
 const pathToSrc = process.argv[2] || path.join(__dirname, '../src');
-const srcGlob = path.join(pathToSrc, '**/*.js');
+const srcGlob = path.join(pathToSrc, '**/*.js').replaceAll("\\","/");
 
 const pathToTranslationKeys =
   process.argv[3] || path.join(__dirname, './translationKeys/translation-keys.txt');
